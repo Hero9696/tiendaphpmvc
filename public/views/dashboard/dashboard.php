@@ -17,8 +17,8 @@
     <!-- Panel de acciones -->
     <div class="row mb-4">
         <div class="col-md-4 mb-3">
-            <a href="index.php?c=Producto&a=crear" class="btn btn-primary w-100 p-3">
-                <i class="bi bi-box-seam"></i> Crear Producto
+            <a href="/productos" class="btn btn-primary w-100 p-3">
+                <i class="bi bi-box-seam"></i>  Productos
             </a>
         </div>
         <div class="col-md-4 mb-3">
@@ -27,7 +27,7 @@
             </a>
         </div>
         <div class="col-md-4 mb-3">
-            <a href="index.php?c=Venta&a=index" class="btn btn-success w-100 p-3">
+            <a href="/ventas" class="btn btn-success w-100 p-3">
                 <i class="bi bi-receipt"></i> Ver Ventas
             </a>
         </div>

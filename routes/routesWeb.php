@@ -30,6 +30,18 @@ switch ($uri) {
                     $controller = new DashboardController();
                     $controller->index();
                     break;
+
+                    case '/productos':
+                        require_once __DIR__ . '/../api/controllers/ProductoController.php';
+                        $controller = new ProductoController();
+                        $controller->index();
+                        break;
+
+                        case '/guardar':
+                            require_once __DIR__ . '/../api/controllers/ProductoController.php';
+                            $controller = new ProductoController();
+                            $controller->guardar();
+                            break;
     
     default:
         http_response_code(404);

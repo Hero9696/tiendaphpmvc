@@ -8,7 +8,7 @@ class Usuario {
         global $conn;
     
         // Validar fortaleza de la contraseña
-        /*if (
+        if (
             strlen($clave) < 8 ||
             !preg_match('/[a-z]/', $clave) ||
             !preg_match('/[A-Z]/', $clave) ||
@@ -17,7 +17,7 @@ class Usuario {
         ) {
             echo "<script>alert('La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un símbolo.'); window.location.href = '/registrer';</script>";
             exit;
-        }*/
+        }
     
         // Encriptar y guardar
         $claveHash = password_hash($clave, PASSWORD_BCRYPT);

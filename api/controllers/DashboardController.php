@@ -5,16 +5,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 class DashboardController {
- /*   public function index() {
-        // Instanciar modelos
-        $ventaModel = new Venta();
-        $gastoModel = new Gasto();
 
-        // Obtener totales
-        $totalVentas = $ventaModel->obtenerTotalVentas();
-        $totalGastos = $gastoModel->obtenerTotalGastos();
-
-    }*/
     public function index() {
          // Instanciar modelos
          $ventaModel = new Venta();
@@ -37,7 +28,7 @@ class DashboardController {
             ob_start();
             require __DIR__ . '/../../public/views/dashboard/dashboard.php';
             $content = ob_get_clean();
-            $title = "Chat";
+            $title = "Dashboard"; // Establece el título de la página
             require_once __DIR__ . '/../../public/views/layout/layout.php';
         } catch (Exception $e) {
             // Token expirado o inválido
