@@ -1,11 +1,12 @@
 <?php
  require_once __DIR__ .'/../config/configdatabase.php';
 
+
 class Usuario {
    
 
     public function registrar($nombre, $usuario, $clave, $rol) {
-        global $conn;
+        $conn = Database::getConnection();
     
         // Validar fortaleza de la contraseña
         if (
@@ -32,7 +33,7 @@ class Usuario {
     }
 
     public function buscarPorUsuario($usuario) {
-        global $conn;
+        $conn = Database::getConnection();
 
         $stmt = $conn->prepare("SELECT * FROM usuarios WHERE usuario = ?");
         $stmt->bind_param("s", $usuario);
@@ -46,7 +47,7 @@ class Usuario {
     }
 
     public function verificar($usuario, $clave) {
-        global $conn;
+         $conn = Database::getConnection();
 
         $stmt = $conn->prepare("SELECT clave FROM usuarios WHERE usuario = ?");
         $stmt->bind_param("s", $usuario);

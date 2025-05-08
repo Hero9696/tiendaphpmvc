@@ -1,59 +1,28 @@
 <?php
+class Router {
+    private $routes = [];
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    public function add($method, $path, $handler) {
+        $this->routes[] = compact('method', 'path', 'handler');
+    }
 
-switch ($uri) {
-    case '/':
-        require_once __DIR__ . '/../api/controllers/AuthController.php';
-        $controller = new AuthController();
-        $controller->login();
-        break;
-    case '/login':
-        require_once __DIR__ . '/../api/controllers/AuthController.php';
-        $controller = new AuthController();
-        $controller->autenticar();
-        break;
+    public function dispatch($method, $uri) {
+        foreach ($this->routes as $route) {
+            if ($route['method'] === $method && preg_match($this->convertToRegex($route['path']), $uri, $matches)) {
+                require_once __DIR__ . '/../api/controllers/' . $route['handler'][0] . '.php';
+                $controllerName = $route['handler'][0];
+                $methodName = $route['handler'][1];
+                $controller = new $controllerName();
 
-        case '/registrer':
-            require_once __DIR__ . '/../api/controllers/AuthController.php';
-            $controller = new AuthController();
-            $controller->registrer();
-            break;
-            case '/register':
-                require_once __DIR__ . '/../api/controllers/AuthController.php';
-                $controller = new AuthController();
-                $controller->register();
-                break;
+                return call_user_func_array([$controller, $methodName], array_slice($matches, 1));
+            }
+        }
 
-                case '/dashboard':
-                    require_once __DIR__ . '/../api/controllers/DashboardController.php';
-                    $controller = new DashboardController();
-                    $controller->index();
-                    break;
-
-                    case '/dashboard/productos':
-                        require_once __DIR__ . '/../api/controllers/DashboardProductoController.php';
-                        $controller = new DashboardProductosController();
-                        $controller->dashboard();
-                        break;
-
-                    case '/productos':
-                        require_once __DIR__ . '/../api/controllers/ProductoController.php';
-                        $controller = new ProductoController();
-                        $controller->index();
-                   
-                        break;
-
-                        case '/guardar':
-                            require_once __DIR__ . '/../api/controllers/ProductoController.php';
-                            $controller = new ProductoController();
-                            $controller->guardar();
-                            break;
-    
-    
-                           
-        default:
         http_response_code(404);
         echo "Página no encontrada";
-        break;
+    }
+
+    private function convertToRegex($path) {
+        return '#^' . preg_replace('#\{([\w]+)\}#', '([\w-]+)', $path) . '$#';
+    }
 }

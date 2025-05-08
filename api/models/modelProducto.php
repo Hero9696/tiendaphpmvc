@@ -4,7 +4,7 @@ class Producto {
 
 
     public function guardar($nombre, $codigo, $precio_compra, $precio_venta, $stock, $id_categoria) {
-        global $conn;
+         $conn = Database::getConnection();
     
         $stmt = $conn->prepare("INSERT INTO productos (nombre,codigo, precio_compra, precio_venta,stock, id_categoria) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $nombre, $codigo, $precio_compra, $precio_venta, $stock, $id_categoria);    
@@ -17,7 +17,7 @@ class Producto {
     }
 
     public function obtenerProductosOrdenadosPorStock() {
-        global $conn;
+        $conn = Database::getConnection();
 
         $stmt = $conn->prepare("SELECT * FROM productos ORDER BY stock ASC");
         $stmt->execute();

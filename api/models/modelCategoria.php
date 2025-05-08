@@ -5,7 +5,7 @@ class Categoria {
    
 
     public function obtenerCategorias() {
-        global $conn;
+         $conn = Database::getConnection();
 
         $stmt = $conn->prepare("SELECT id, nombre FROM categorias");
         $stmt->execute();

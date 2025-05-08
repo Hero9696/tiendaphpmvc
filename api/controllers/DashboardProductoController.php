@@ -1,7 +1,7 @@
 <?php
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-class DashboardProductosController {
+class DashboardProductoController {
     // Método para mostrar el dashboard de productos
  public function dashboard() {
             // Verificar que el token es válido

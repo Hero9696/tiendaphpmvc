@@ -1,8 +1,14 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db = 'tienda';
+class Database {
+    private static $conn;
 
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) die("Conexión fallida: " . $conn->connect_error);
+    public static function getConnection() {
+        if (!self::$conn) {
+            self::$conn = new mysqli('localhost', 'root', '', 'tienda');
+            if (self::$conn->connect_error) {
+                die("Conexión fallida: " . self::$conn->connect_error);
+            }
+        }
+        return self::$conn;
+    }
+}
