@@ -49,7 +49,7 @@ class ProductoController {
             $producto = new Producto();
             $producto->guardar($nombre, $codigo, $precio_compra,$precio_venta, $stock,$id_categoria);
         
-            header('Location:/productos ');
+            header('Location:/producto/crear ');
         }
 
        

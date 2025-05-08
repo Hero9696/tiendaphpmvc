@@ -17,11 +17,11 @@ $router->add('GET', '/dashboard', ['DashboardController', 'index']);
 
 //Rutas para Productos
 $router->add('GET', '/dashboard/productos', ['DashboardProductoController', 'dashboard']);
-$router->add('GET', '/productos', ['ProductoController', 'index']);
+$router->add('GET', '/producto/crear', ['ProductoController', 'index']);
 $router->add('POST', '/guardar', ['ProductoController', 'guardar']);
 
 // Rutas Dinámicas Productos
-$router->add('GET', '/producto/editar/{id}', ['ProductoController', 'editar']);
+$router->add('GET', '/producto/editar/', ['ProductoController', 'editar']);
 
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

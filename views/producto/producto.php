@@ -51,7 +51,7 @@
 
         <button type="submit" class="btn btn-primary w-100">Guardar Producto</button>
         <div class="mt-3 text-center">
-            <a href="/dashboard" class="btn btn-link">Volver al Dashboard</a>
+            <a href="/dashboard/productos" class="btn btn-link">Volver al Dashboard</a>
         </div>
     </form>
 </div>
