@@ -31,6 +31,12 @@ switch ($uri) {
                     $controller->index();
                     break;
 
+                    case '/dashboard/productos':
+                        require_once __DIR__ . '/../api/controllers/ProductoController.php';
+                        $controller = new ProductoController();
+                        $controller->dashboard();
+                        break;
+
                     case '/productos':
                         require_once __DIR__ . '/../api/controllers/ProductoController.php';
                         $controller = new ProductoController();

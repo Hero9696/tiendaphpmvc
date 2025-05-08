@@ -15,4 +15,16 @@ class Producto {
             echo "<script>alert('Error al registrar el usuario. Puede que ya exista.'); window.location.href = '/registrer';</script>";
         }
     }
+
+    public function obtenerProductosOrdenadosPorStock() {
+        global $conn;
+
+        $stmt = $conn->prepare("SELECT * FROM productos ORDER BY stock ASC");
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $productos = $resultado->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close();
+        return $productos;
+    }
 }

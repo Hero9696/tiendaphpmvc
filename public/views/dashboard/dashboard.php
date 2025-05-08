@@ -17,7 +17,7 @@
     <!-- Panel de acciones -->
     <div class="row mb-4">
         <div class="col-md-4 mb-3">
-            <a href="/productos" class="btn btn-primary w-100 p-3">
+            <a href="/dashboard/productos" class="btn btn-primary w-100 p-3">
                 <i class="bi bi-box-seam"></i>  Productos
             </a>
         </div>
