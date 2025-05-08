@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/Usuario.php'; // Asegúrate de que la ruta sea correcta
+require_once __DIR__ . '/../models/modelUsuario.php'; // Asegúrate de que la ruta sea correcta
 require_once __DIR__ . '/../../vendor/autoload.php'; // Asegúrate de que la ruta sea correcta
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
