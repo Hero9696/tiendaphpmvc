@@ -6,6 +6,8 @@ use Firebase\JWT\Key;
 class ProductoController {
 
     public function index() {
+
+        
         if (!isset($_COOKIE['token'])) {
             header("Location: /");
             exit();
@@ -17,7 +19,9 @@ class ProductoController {
         try {
             $decoded = JWT::decode($_COOKIE['token'], new Key('clave_secreta_segura', 'HS256'));
             // Token válido, muestra la vista
-            ob_start();
+            ob_start();  require_once __DIR__ . '/../models/modelCategoria.php';
+            $categoriaModel = new Categoria();
+            $categorias = $categoriaModel->obtenerCategorias();
             require __DIR__ . '/../../public/views/producto/producto.php';
             $content = ob_get_clean();
             $title = "Crear Producto";
@@ -48,13 +52,7 @@ class ProductoController {
             header('Location:/productos ');
         }
 
-        public function crear() {
-            require_once __DIR__ . '/../models/modelCategoria.php';
-            $categoriaModel = new Categoria();
-            $categorias = $categoriaModel->obtenerCategorias();
-        
-            require_once __DIR__ . '/../../public/views/producto/producto.php';
-        }
+      
         
 
         

@@ -35,6 +35,7 @@ switch ($uri) {
                         require_once __DIR__ . '/../api/controllers/ProductoController.php';
                         $controller = new ProductoController();
                         $controller->index();
+                   
                         break;
 
                         case '/guardar':
@@ -43,7 +44,9 @@ switch ($uri) {
                             $controller->guardar();
                             break;
     
-    default:
+    
+                           
+        default:
         http_response_code(404);
         echo "Página no encontrada";
         break;

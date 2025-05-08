@@ -10,7 +10,7 @@ class Categoria {
         $stmt = $conn->prepare("SELECT id, nombre FROM categorias");
         $stmt->execute();
         $resultado = $stmt->get_result();
-        $categoriaEncontrada = $resultado->fetch_assoc();
+        $categoriaEncontrada = $resultado->fetch_all(MYSQLI_ASSOC); 
 
         $stmt->close();
         return $categoriaEncontrada;
