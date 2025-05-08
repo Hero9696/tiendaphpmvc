@@ -61,7 +61,7 @@
                     <th>Stock</th>
                     <th>Precio de Compra</th>
                     <th>Precio de Venta</th>
-                    <th>Acciones</th>
+                 
                 </tr>
             </thead>
             <tbody>
@@ -73,10 +73,7 @@
                         <td><?= $producto['stock'] ?></td>
                         <td>Q <?= number_format($producto['precio_compra'], 2) ?></td>
                         <td>Q <?= number_format($producto['precio_venta'], 2) ?></td>
-                        <td>
-                            <a href="/producto/editar/<?= $producto['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
-                            <a href="/producto/añadirStock/<?= $producto['id'] ?>" class="btn btn-primary btn-sm">Añadir Stock</a>
-                        </td>
+                     
                     </tr>
                 <?php endforeach; ?>
             </tbody>
