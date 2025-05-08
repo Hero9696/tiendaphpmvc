@@ -26,10 +26,10 @@ class DashboardController {
             $decoded = JWT::decode($_COOKIE['token'], new Key('clave_secreta_segura', 'HS256'));
             // Token válido, muestra la vista
             ob_start();
-            require __DIR__ . '/../../public/views/dashboard/dashboard.php';
+            require __DIR__ . '/../../views/dashboard/dashboard.php';
             $content = ob_get_clean();
             $title = "Dashboard"; // Establece el título de la página
-            require_once __DIR__ . '/../../public/views/layout/layout.php';
+            require_once __DIR__ . '/../../views/layout/layout.php';
         } catch (Exception $e) {
             // Token expirado o inválido
             echo "<script>
@@ -57,6 +57,6 @@ class DashboardController {
     public function logout() {
         session_start();
         session_destroy();
-        header("Location: index.php?c=Auth&a=login");
+        header("Location: /login");
     }
 }

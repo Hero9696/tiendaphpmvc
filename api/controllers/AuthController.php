@@ -11,7 +11,7 @@ class AuthController {
         
         $content = $this->render('auth/login.php');  // Renderiza la vista del registro
         $title = 'Login';  // Establece el título de la página
-        require_once __DIR__ . '/../../public/views/layout/layout.php';  // Incluye el layout con el contenido
+        require_once __DIR__ . '/../../views/layout/layout.php';  // Incluye el layout con el contenido
     }
 
     public function autenticar() {
@@ -36,7 +36,7 @@ class AuthController {
       public function registrer() {
         $content = $this->render('auth/registrer.php');  // Renderiza la vista del registro
         $title = 'Registro';  // Establece el título de la página
-        require_once __DIR__ . '/../../public/views/layout/layout.php';  // Incluye el layout con el contenido
+        require_once __DIR__ . '/../../views/layout/layout.php';  // Incluye el layout con el contenido
     }
 
     public function register() {
@@ -47,13 +47,13 @@ class AuthController {
 
     private function render($view) {
         ob_start();  // Inicia la captura de salida
-        require_once __DIR__ . '/../../public/views/' . $view;  // Incluye la vista especificada
+        require_once __DIR__ . '/../../views/' . $view;  // Incluye la vista especificada
         return ob_get_clean();  // Devuelve el contenido generado
     }
 
     public function logout() {
         session_start();
         session_destroy();
-        header("Location: index.php?c=Auth&a=login");
+        header("Location: /login");
     }
 }

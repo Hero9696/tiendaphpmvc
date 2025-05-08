@@ -22,10 +22,10 @@ class ProductoController {
             ob_start();  require_once __DIR__ . '/../models/modelCategoria.php';
             $categoriaModel = new Categoria();
             $categorias = $categoriaModel->obtenerCategorias();
-            require __DIR__ . '/../../public/views/producto/producto.php';
+            require __DIR__ . '/../../views/producto/producto.php';
             $content = ob_get_clean();
             $title = "Crear Producto";
-            require_once __DIR__ . '/../../public/views/layout/layout.php';
+            require_once __DIR__ . '/../../views/layout/layout.php';
         } catch (Exception $e) {
             // Token expirado o inválido
             echo "<script>

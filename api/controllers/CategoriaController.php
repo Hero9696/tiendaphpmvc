@@ -11,7 +11,7 @@ class CategoriaController {
         $categoriaModel = new Categoria();
         $categorias = $categoriaModel->obtenerCategorias();
     
-        require_once __DIR__ . '/../../public/views/producto/producto.php';
+        require_once __DIR__ . '/../../views/producto/producto.php';
     }
     
         }

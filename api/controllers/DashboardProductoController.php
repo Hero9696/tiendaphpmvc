@@ -23,10 +23,10 @@ class DashboardProductosController {
         
                 // Mostrar la vista
                 ob_start();
-                require __DIR__ . '/../../public/views/dashboard/dashboardproductos.php';
+                require __DIR__ . '/../../views/dashboard/dashboardproductos.php';
                 $content = ob_get_clean();
                 $title = "Dashboard de Productos";
-                require_once __DIR__ . '/../../public/views/layout/layout.php';
+                require_once __DIR__ . '/../../views/layout/layout.php';
             } catch (Exception $e) {
                 // Si el token es inválido o ha expirado
                 echo "<script>
