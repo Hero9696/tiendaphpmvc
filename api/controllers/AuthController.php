@@ -33,7 +33,7 @@ class AuthController {
     }
 
       // Método para mostrar la página de registro
-      public function registrer() {
+      public function registerform() {
         $content = $this->render('auth/registrer.php');  // Renderiza la vista del registro
         $title = 'Registro';  // Establece el título de la página
         require_once __DIR__ . '/../../views/layout/layout.php';  // Incluye el layout con el contenido

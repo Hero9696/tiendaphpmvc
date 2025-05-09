@@ -9,7 +9,7 @@
 <body>
 
 <div class="register-box text-center">
-    <img src="public/img/shop-icon.png" alt="Logo Tienda" class="logo mb-3">
+    
     <h3 class="register-header mb-4">Registro de Usuario</h3>
 
     <form action="/register" method="POST">
