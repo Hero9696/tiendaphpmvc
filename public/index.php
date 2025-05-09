@@ -8,8 +8,9 @@ $router = new Router();
 //Rutas para el AuthController
 $router->add('GET', '/', ['AuthController', 'login']);
 $router->add('POST', '/login', ['AuthController', 'autenticar']);
-$router->add('GET', '/registrer', ['AuthController', 'registrer']);
+$router->add('GET', '/registerform', ['AuthController', 'registerform']);
 $router->add('POST', '/register', ['AuthController', 'register']);
+$router->add('GET', '/logout', ['AuthController', 'logout']);
 
 //Rutas para el Dashboard
 $router->add('GET', '/dashboard', ['DashboardController', 'index']);

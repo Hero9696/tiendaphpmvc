@@ -1,12 +1,14 @@
 <?php
 require_once __DIR__ . '/../models/modelVenta.php';
 require_once __DIR__ . '/../models/modelGasto.php';
+require_once __DIR__ . '/../middleware/auth.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 class DashboardController {
 
     public function index() {
+        verificarToken(); // Verifica el token antes de continuar
          // Instanciar modelos
          $ventaModel = new Venta();
          $gastoModel = new Gasto();
@@ -39,10 +41,7 @@ class DashboardController {
             exit();
         }
             
-            // Renderiza la vista del chat
-           // $content = $this->render('chat/chat.php');
-           // $title = 'Chat';  // Establece el título de la página
-           // require_once __DIR__ . '/../layout/layout.php';  // Incluye el layout con el contenido
+          
         }
     
     
@@ -54,9 +53,5 @@ class DashboardController {
         return ob_get_clean();  // Devuelve el contenido generado
     }
 
-    public function logout() {
-        session_start();
-        session_destroy();
-        header("Location: /login");
-    }
+ 
 }

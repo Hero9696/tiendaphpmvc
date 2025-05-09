@@ -11,7 +11,7 @@
 <div class="container-fluid dashboard-box">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Sistema de Inventario</h2>
-        <a href="index.php?c=Auth&a=logout" class="btn btn-outline-secondary">Cerrar sesión</a>
+        <a href="/logout" class="btn btn-outline-secondary">Cerrar sesión</a>
     </div>
 
     <!-- Panel de acciones -->

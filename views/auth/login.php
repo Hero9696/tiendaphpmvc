@@ -24,7 +24,7 @@
         </div>
         <button class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
     </form>
-    <a href="/registrer" class="btn btn-outline-secondary w-100 mt-3">Registrarse</a>
+    <a href="/registerform" class="btn btn-outline-secondary w-100 mt-3">Registrarse</a>
 
     <div class="mt-4 text-muted small">
         &copy; <?php echo date("Y"); ?> Sistema Inventario para Tiendas Rurales

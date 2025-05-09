@@ -18,14 +18,14 @@
                             <a class="nav-link" href="/chat">Chat</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="cerrarSesion" href="/">Cerrar sesión</a>
+                            <a  class="nav-link" id="cerrarSesion" href="/logout">Cerrar sesión</a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
                             <a class="nav-link" href="/">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">Registro</a>
+                            <a class="nav-link" href="/logout">Registro</a>
                         </li>
                     <?php endif; ?>
                 </ul>

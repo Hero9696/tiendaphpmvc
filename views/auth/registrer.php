@@ -37,7 +37,7 @@
     </form>
 
     <div class="mt-3">
-        <a href="index.php?c=Auth&a=login" class="btn btn-link">¿Ya tienes cuenta? Inicia sesión</a>
+        <a href="/" class="btn btn-link">¿Ya tienes cuenta? Inicia sesión</a>
     </div>
 
     <div class="mt-3 text-muted small">
