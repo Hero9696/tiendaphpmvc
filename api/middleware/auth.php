@@ -8,6 +8,7 @@ function verificarToken() {
     if (!isset($_COOKIE['token'])) {
         http_response_code(401);
         echo json_encode(["mensaje" => "Token no proporcionado"]);
+        header("Location: /"); // Redirige al login
         exit;
     }
 

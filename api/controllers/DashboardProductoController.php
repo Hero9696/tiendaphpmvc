@@ -1,10 +1,13 @@
 <?php
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+
+require_once __DIR__ . '/../middleware/auth.php'; // Asegúrate de que la ruta sea correcta
 class DashboardProductoController {
     // Método para mostrar el dashboard de productos
  public function dashboard() {
             // Verificar que el token es válido
+            verificarToken(); // Verifica el token antes de continuar
             if (!isset($_COOKIE['token'])) {
                 header("Location: /");
                 exit();

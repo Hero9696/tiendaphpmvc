@@ -52,8 +52,8 @@ class AuthController {
     }
 
     public function logout() {
-        session_start();
-        session_destroy();
-        header("Location: /login");
+        // Elimina la cookie del token
+        setcookie("token", "", time() - 79200, "/"); // Elimina la cookie estableciendo su tiempo de expiración en el pasado
+        header("Location: /"); // Redirige al login después de cerrar sesión
     }
 }
