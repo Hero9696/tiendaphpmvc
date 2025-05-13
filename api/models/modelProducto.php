@@ -3,18 +3,26 @@ require_once __DIR__ .'/../config/configdatabase.php';
 class Producto {
 
 
-    public function guardar($nombre, $codigo, $precio_compra, $precio_venta, $stock, $id_categoria) {
-         $conn = Database::getConnection();
-    
-        $stmt = $conn->prepare("INSERT INTO productos (nombre,codigo, precio_compra, precio_venta,stock, id_categoria) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $nombre, $codigo, $precio_compra, $precio_venta, $stock, $id_categoria);    
-    
-        if ($stmt->execute()) {
-            echo "<script>alert('Usuario registrado exitosamente.'); window.location.href = '/';</script>";
-        } else {
-            echo "<script>alert('Error al registrar el usuario. Puede que ya exista.'); window.location.href = '/registrer';</script>";
-        }
+   public function guardar($nombre, $codigo, $precio_compra, $precio_venta, $stock, $unidad_medida, $id_categoria, $id_proveedor, $fecha_ingreso, $activo) {
+    $conn = Database::getConnection();
+
+    $stmt = $conn->prepare("
+        INSERT INTO productos (nombre, codigo, precio_compra, precio_venta, stock, unidad_medida, id_categoria, id_proveedor, fecha_ingreso, activo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    $stmt->bind_param("ssddissisi", 
+        $nombre, $codigo, $precio_compra, $precio_venta, $stock, 
+        $unidad_medida, $id_categoria, $id_proveedor, $fecha_ingreso, $activo
+    );
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Producto registrado exitosamente.'); window.location.href = '/dashboard/productos';</script>";
+    } else {
+        echo "<script>alert('Error al registrar el producto.'); window.location.href = '/producto/crear';</script>";
     }
+}
+
 
     public function actualizar(
     string $nombre,
