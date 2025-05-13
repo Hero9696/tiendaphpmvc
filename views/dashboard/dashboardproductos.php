@@ -5,23 +5,15 @@
     <title>Dashboard de Productos | Sistema de Tienda</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .card {
-            margin-bottom: 20px;
-        }
-        .product-table th, .product-table td {
-            text-align: center;
-        }
-        .panel {
-            margin-bottom: 30px;
-        }
+        .card { margin-bottom: 20px; }
+        .product-table th, .product-table td { text-align: center; }
+        .panel { margin-bottom: 30px; }
     </style>
 </head>
 <body>
 <div class="container mt-5">
     <div class="row">
-        <!-- Paneles para Crear, Editar y Añadir Stock -->
-         
-<a href="/dashboard" class="btn btn-link">Volver al Dashboard</a>
+        <a href="/dashboard" class="btn btn-link mb-4">Volver al Dashboard</a>
 
         <div class="col-md-4">
             <div class="panel card">
@@ -44,14 +36,13 @@
         <div class="col-md-4">
             <div class="panel card">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Añadir Categorias</h5>
+                    <h5 class="card-title">Añadir Catergorias</h5>
                     <a href="/producto/añadirStock" class="btn btn-primary w-100">Añadir Categorias</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Tabla de Productos -->
     <div class="mt-4">
         <h3 class="text-center mb-4">Productos con Menor Stock</h3>
         <table class="table table-bordered product-table">
@@ -63,26 +54,32 @@
                     <th>Stock</th>
                     <th>Precio de Compra</th>
                     <th>Precio de Venta</th>
-                 
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($productos as $producto): ?>
-                    <tr>
+                <?php foreach ($productos as $producto): 
+                    // Determinar la clase de la fila según el stock
+                    $stock = (int)$producto['stock'];
+                    if ($stock <= 5) {
+                        $rowClass = 'table-danger';
+                    } elseif ($stock <= 10) {
+                        $rowClass = 'table-warning';
+                    } else {
+                        $rowClass = '';
+                    }
+                ?>
+                    <tr class="<?= $rowClass ?>">
                         <td><?= $producto['id'] ?></td>
                         <td><?= htmlspecialchars($producto['nombre']) ?></td>
                         <td><?= htmlspecialchars($producto['codigo']) ?></td>
-                        <td><?= $producto['stock'] ?></td>
+                        <td><?= $stock ?></td>
                         <td>Q <?= number_format($producto['precio_compra'], 2) ?></td>
                         <td>Q <?= number_format($producto['precio_venta'], 2) ?></td>
-                     
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-     
 </div>
-
 </body>
 </html>
