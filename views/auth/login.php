@@ -9,6 +9,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8d7x1z5l5e5c5e5e5e5e5e5e5e5e5e5e5e5" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <style>
+        
+        body {
+            background: linear-gradient(to right, #f8f9fa, #e0f7fa);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-box {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-header {
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .logo {
+            width: 60px;
+        }
+    
+    </style>
 
 <div class="login-box text-center">
     <h3 class="login-header mb-4">Sistema de Tienda</h3>

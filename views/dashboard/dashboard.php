@@ -7,7 +7,37 @@
   <link rel="stylesheet" href="/public/css/dashboard.css">
 </head>
 <body>
-
+<style>
+    
+body {
+    background-color: #f1f3f5;
+}
+.dashboard-box {
+    padding: 2rem;
+}
+.card-icon {
+    font-size: 2rem;
+    color: #fff;
+}
+.card {
+    border: none;
+    border-radius: 1rem;
+}
+.card-summary {
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.bg-ventas {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+.bg-gastos {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+.bg-balance {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+}
+</style>
 <div class="container-fluid dashboard-box">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Sistema de Inventario</h2>
