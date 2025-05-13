@@ -29,9 +29,9 @@
     <div class="col-md-3">
       <select name="stock_filter" class="form-select">
         <option value="">Todos los stocks</option>
-        <option value="low"  <?= $stockFilter==='low'  ? 'selected' : '' ?>>≤ 5 unidades</option>
-        <option value="mid"  <?= $stockFilter==='mid'  ? 'selected' : '' ?>>6 – 10 unidades</option>
-        <option value="high" <?= $stockFilter==='high' ? 'selected' : '' ?>>> 10 unidades</option>
+        <option value="low"  <?= $stockFilter==='low'  ? 'selected' : '' ?>>Menos de 5 unidades</option>
+        <option value="mid"  <?= $stockFilter==='mid'  ? 'selected' : '' ?>> Unidades  entre 6 y 10 </option>
+        <option value="high" <?= $stockFilter==='high' ? 'selected' : '' ?>>Mayor a 10 unidades</option>
       </select>
     </div>
     <div class="col-md-3">
@@ -71,7 +71,7 @@
     <div class="col-md-4">
       <div class="panel card">
         <div class="card-body text-center">
-          <h5 class="card-title">Añadir Stock</h5>
+          <h5 class="card-title">Añadir Categorias</h5>
           <a href="/producto/añadirStock" class="btn btn-primary w-100">Añadir</a>
         </div>
       </div>
@@ -84,7 +84,6 @@
     <table class="table table-bordered product-table">
       <thead>
         <tr>
-          <th>#</th>
           <th>Nombre</th>
           <th>Código</th>
           <th>Categoría</th>
@@ -100,7 +99,6 @@
                     : ($stock<=10 ? 'table-warning' : '');
         ?>
           <tr class="<?= $rowClass ?>">
-            <td><?= $p['id'] ?></td>
             <td><?= htmlspecialchars($p['nombre']) ?></td>
             <td><?= htmlspecialchars($p['codigo']) ?></td>
             <td><?= htmlspecialchars($p['categoria_nombre']) ?></td>
@@ -111,6 +109,36 @@
         <?php endforeach; ?>
       </tbody>
     </table>
+    <!-- ... después de </table> ... -->
+<?php if ($totalPages > 1): ?>
+<nav aria-label="Páginas">
+  <ul class="pagination justify-content-center">
+    <!-- Anterior -->
+    <li class="page-item <?= $currentPage<=1 ? 'disabled' : '' ?>">
+      <a class="page-link" href="?<?= http_build_query(array_merge($_GET,['page'=>$currentPage-1])) ?>">
+        &laquo; Anterior
+      </a>
+    </li>
+
+    <!-- Números de página -->
+    <?php for($i=1; $i<=$totalPages; $i++): ?>
+      <li class="page-item <?= $i===$currentPage ? 'active' : '' ?>">
+        <a class="page-link" href="?<?= http_build_query(array_merge($_GET,['page'=>$i])) ?>">
+          <?= $i ?>
+        </a>
+      </li>
+    <?php endfor; ?>
+
+    <!-- Siguiente -->
+    <li class="page-item <?= $currentPage>=$totalPages ? 'disabled' : '' ?>">
+      <a class="page-link" href="?<?= http_build_query(array_merge($_GET,['page'=>$currentPage+1])) ?>">
+        Siguiente &raquo;
+      </a>
+    </li>
+  </ul>
+</nav>
+<?php endif; ?>
+
   </div>
 </div>
 </body>

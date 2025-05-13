@@ -20,11 +20,11 @@ class AuthController {
             $key = "clave_secreta_segura";
             $payload = [
                 "usuario" => $_POST['usuario'],
-                "exp" => time() + 600 // 10 minutos
+                "exp" => time() + 6000 // 10 minutos
             ];
     
             $jwt = JWT::encode($payload, $key, 'HS256');
-            setcookie("token", $jwt, time() + 600, "/"); // cookie válida por 10 min
+            setcookie("token", $jwt, time() + 6000, "/"); // cookie válida por 10 min
     
             header("Location: /dashboard"); // Redirige al dashboard después de iniciar sesión
         } else {

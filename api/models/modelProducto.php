@@ -162,5 +162,80 @@ public function obtenerProductosFiltrados(
     return $productos;
 }
 
+public function contarFiltrados(string $search, string $stockFilter, string $categoriaId): int {
+        $conn = Database::getConnection();
+        // Reusa la lógica de construcción de WHERE de tu método obtenerProductosFiltrados
+        $sql = "SELECT COUNT(*) AS total
+                FROM productos p
+                LEFT JOIN categorias c ON p.id_categoria = c.id";
+        $conds = []; $params = []; $types = '';
+        if ($search!=='') {
+            $conds[] = "(p.nombre LIKE ? OR p.codigo LIKE ? OR c.nombre LIKE ?)";
+            $like = "%{$search}%";
+            $params = array_merge($params, [$like,$like,$like]);
+            $types .= 'sss';
+        }
+        switch($stockFilter) {
+            case 'low':  $conds[]="p.stock<=5";   break;
+            case 'mid':  $conds[]="p.stock BETWEEN 6 AND 10"; break;
+            case 'high': $conds[]="p.stock>10";   break;
+        }
+        if ($categoriaId!=='') {
+            $conds[]="p.id_categoria = ?"; $params[]=$categoriaId; $types.='i';
+        }
+        if (count($conds)>0) $sql .= ' WHERE '.implode(' AND ',$conds);
+        $stmt = $conn->prepare($sql);
+        if ($types!=='') {
+            // bind dinámico
+            $refs=[]; foreach($params as $i=>&$p){$refs[$i]=&$params[$i];}
+            array_unshift($refs,$types);
+            call_user_func_array([$stmt,'bind_param'],$refs);
+        }
+        $stmt->execute();
+        $total = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
+        $stmt->close();
+        return (int)$total;
+    }
+
+    // (b) Obtiene una página de productos con limit & offset
+    public function obtenerPagina(
+        string $search, string $stockFilter, string $categoriaId,
+        int $limit, int $offset
+    ): array {
+        $conn = Database::getConnection();
+        $sql = "SELECT p.*, c.nombre AS categoria_nombre
+                FROM productos p
+                LEFT JOIN categorias c ON p.id_categoria = c.id";
+        $conds=[]; $params=[]; $types='';
+        if ($search!=='') {
+            $conds[]="(p.nombre LIKE ? OR p.codigo LIKE ? OR c.nombre LIKE ?)";
+            $like="%{$search}%";
+            $params=array_merge($params,[$like,$like,$like]);
+            $types.='sss';
+        }
+        switch($stockFilter) {
+            case 'low':  $conds[]="p.stock<=5";   break;
+            case 'mid':  $conds[]="p.stock BETWEEN 6 AND 10"; break;
+            case 'high': $conds[]="p.stock>10";   break;
+        }
+        if ($categoriaId!=='') {
+            $conds[]="p.id_categoria = ?"; $params[]=$categoriaId; $types.='i';
+        }
+        if (count($conds)>0) $sql .= ' WHERE '.implode(' AND ',$conds);
+        $sql .= ' ORDER BY p.stock ASC LIMIT ? OFFSET ?';
+        $types .= 'ii';
+        $params[] = $limit;
+        $params[] = $offset;
+        $stmt = $conn->prepare($sql);
+        // bind dinámico
+        $refs=[]; foreach($params as $i=>&$p){$refs[$i]=&$params[$i];}
+        array_unshift($refs,$types);
+        call_user_func_array([$stmt,'bind_param'],$refs);
+        $stmt->execute();
+        $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $rows;
+    }
+
 
 }

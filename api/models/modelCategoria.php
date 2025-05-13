@@ -4,15 +4,22 @@
 class Categoria {
    
 
-    public function obtenerCategorias() {
-         $conn = Database::getConnection();
+   public function obtenerCategorias(): array {
+    $conn = Database::getConnection();
 
-        $stmt = $conn->prepare("SELECT id, nombre FROM categorias");
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        $categoriaEncontrada = $resultado->fetch_all(MYSQLI_ASSOC); 
+    // Selecciona categorías ordenadas alfabéticamente por nombre
+    $stmt = $conn->prepare("
+        SELECT id, nombre
+        FROM categorias
+        ORDER BY nombre ASC
+    ");
+    $stmt->execute();
 
-        $stmt->close();
-        return $categoriaEncontrada;
-    }
+    $resultado = $stmt->get_result();
+    $categoriaEncontrada = $resultado->fetch_all(MYSQLI_ASSOC);
+
+    $stmt->close();
+    return $categoriaEncontrada;
+}
+
 }

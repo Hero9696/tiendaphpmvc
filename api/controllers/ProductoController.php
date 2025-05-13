@@ -81,7 +81,7 @@ verificarToken(); // Verifica el token antes de continuar
             $producto = new Producto();
             $producto->guardar($nombre, $codigo, $precio_compra,$precio_venta, $stock,$id_categoria);
         
-            header('Location:/producto/crearProducto ');
+            header('Location:/producto/crear ');
         }
 public function actualizar() {
     // 1) Leer todos los campos, incluido el id
