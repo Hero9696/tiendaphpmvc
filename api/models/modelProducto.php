@@ -16,6 +16,50 @@ class Producto {
         }
     }
 
+    public function actualizar(
+    string $nombre,
+    string $codigo,
+    float $precio_compra,
+    float $precio_venta,
+    int $stock,
+    int $id_categoria
+): bool {
+    $conn = Database::getConnection();
+
+    $sql = "
+        UPDATE productos
+        SET 
+            nombre         = ?,
+            codigo         = ?,
+            precio_compra  = ?,
+            precio_venta   = ?,
+            stock          = ?,
+            id_categoria   = ?
+        WHERE codigo = ?
+    ";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        // Error al preparar la consulta
+        return false;
+    }
+
+    // Tipos: s = string, d = double, i = integer
+    $stmt->bind_param(
+        "ssddiis",
+        $nombre,
+        $codigo,
+        $precio_compra,
+        $precio_venta,
+        $stock,
+        $id_categoria,
+        $codigo // Código para la cláusula WHERE
+    );
+
+    $ok = $stmt->execute();
+    $stmt->close();
+    return $ok;
+}
+
     public function obtenerProductosOrdenadosPorStock() {
         $conn = Database::getConnection();
 
@@ -27,4 +71,22 @@ class Producto {
         $stmt->close();
         return $productos;
     }
+
+
+   public function obtenerPorCodigo(string $codigo): ?array {
+    // Obtén la conexión
+    $conn = Database::getConnection();
+
+    // Prepara la consulta filtrando por código
+    $stmt = $conn->prepare("SELECT * FROM productos WHERE codigo = ? LIMIT 1");
+    $stmt->bind_param("s", $codigo);
+    $stmt->execute();
+
+    // Recupera un solo registro
+    $resultado = $stmt->get_result();
+    $producto = $resultado->fetch_assoc() ?: null;
+
+    $stmt->close();
+    return $producto;
+}
 }

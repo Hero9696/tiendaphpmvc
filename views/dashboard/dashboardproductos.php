@@ -17,10 +17,12 @@
     </style>
 </head>
 <body>
-
 <div class="container mt-5">
     <div class="row">
         <!-- Paneles para Crear, Editar y Añadir Stock -->
+         
+<a href="/dashboard" class="btn btn-link">Volver al Dashboard</a>
+
         <div class="col-md-4">
             <div class="panel card">
                 <div class="card-body text-center">
@@ -42,8 +44,8 @@
         <div class="col-md-4">
             <div class="panel card">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Añadir Stock</h5>
-                    <a href="/producto/añadirStock" class="btn btn-primary w-100">Añadir Stock</a>
+                    <h5 class="card-title">Añadir Categorias</h5>
+                    <a href="/producto/añadirStock" class="btn btn-primary w-100">Añadir Categorias</a>
                 </div>
             </div>
         </div>
@@ -79,6 +81,7 @@
             </tbody>
         </table>
     </div>
+     
 </div>
 
 </body>
