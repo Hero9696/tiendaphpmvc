@@ -10,8 +10,8 @@ class AuthController {
     public function login() {
         
         $content = $this->render('auth/login.php');  // Renderiza la vista del registro
-        $title = 'Login';  // Establece el título de la página
-        require_once __DIR__ . '/../../views/layout/layout.php';  // Incluye el layout con el contenido
+       $title = 'Mi Tienda';  // Establece el título de la página
+        require_once __DIR__ . '/../../views/layout/layoutLogin.php';  // Incluye el layout con el contenido
     }
 
     public function autenticar() {
@@ -35,8 +35,8 @@ class AuthController {
       // Método para mostrar la página de registro
       public function registerform() {
         $content = $this->render('auth/registrer.php');  // Renderiza la vista del registro
-        $title = 'Registro';  // Establece el título de la página
-        require_once __DIR__ . '/../../views/layout/layout.php';  // Incluye el layout con el contenido
+        $title = 'Mi Tienda';  // Establece el título de la página
+        require_once __DIR__ . '/../../views/layout/layoutLogin.php';  // Incluye el layout con el contenido
     }
 
     public function register() {

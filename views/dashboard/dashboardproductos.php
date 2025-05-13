@@ -16,21 +16,39 @@
     <a href="/dashboard" class="btn btn-link">Volver al Dashboard</a>
   </div>
 
-  <!-- FORMULARIO DE EXPORTACION-->
-<form class="d-inline" method="GET" action="/producto/export/csv">
-  <!-- Reenviamos los mismos filtros -->
-  <input type="hidden" name="search"       value="<?= htmlspecialchars($search) ?>">
-  <input type="hidden" name="stock_filter" value="<?= htmlspecialchars($stockFilter) ?>">
-  <input type="hidden" name="categoria"    value="<?= htmlspecialchars($categoriaId) ?>">
-  <button class="btn btn-outline-secondary me-2">Exportar a CSV</button>
-</form>
 
-<form class="d-inline" method="GET" action="/producto/export/excel">
-  <input type="hidden" name="search"       value="<?= htmlspecialchars($search) ?>">
-  <input type="hidden" name="stock_filter" value="<?= htmlspecialchars($stockFilter) ?>">
-  <input type="hidden" name="categoria"    value="<?= htmlspecialchars($categoriaId) ?>">
-  <button class="btn btn-outline-success">Exportar a Excel</button>
-</form>
+  <!-- Panel de Exportación -->
+  <div class="row mb-4">
+    <!-- Exportar CSV -->
+    <div class="col-md-6">
+      <div class="panel card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Exportar Productos A Csv</h5>
+          <form method="GET" action="/producto/export/csv">
+            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+            <input type="hidden" name="stock_filter" value="<?= htmlspecialchars($stockFilter) ?>">
+            <input type="hidden" name="categoria" value="<?= htmlspecialchars($categoriaId) ?>">
+            <button class="btn btn-outline-secondary w-100">Descargar CSV</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exportar Excel -->
+    <div class="col-md-6">
+      <div class="panel card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Exportar Productos A Excel</h5>
+          <form method="GET" action="/producto/export/excel">
+            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+            <input type="hidden" name="stock_filter" value="<?= htmlspecialchars($stockFilter) ?>">
+            <input type="hidden" name="categoria" value="<?= htmlspecialchars($categoriaId) ?>">
+            <button class="btn btn-outline-success w-100">Descargar Excel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -102,6 +120,7 @@
     <table class="table table-bordered product-table">
       <thead>
         <tr>
+          <th>#</th>
           <th>Nombre</th>
           <th>Código</th>
           <th>Categoría</th>
@@ -111,12 +130,16 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($productos as $p):
+        
+        <?php
+        $i=1;
+        foreach ($productos as $p):
           $stock = (int)$p['stock'];
           $rowClass = $stock<=5 ? 'table-danger'
                     : ($stock<=10 ? 'table-warning' : '');
         ?>
           <tr class="<?= $rowClass ?>">
+            <td><?= $i++ ?></td>
             <td><?= htmlspecialchars($p['nombre']) ?></td>
             <td><?= htmlspecialchars($p['codigo']) ?></td>
             <td><?= htmlspecialchars($p['categoria_nombre']) ?></td>
