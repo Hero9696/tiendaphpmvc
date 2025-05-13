@@ -23,6 +23,8 @@ $router->add('GET', '/producto/editar', ['ProductoController', 'editar']);
 $router->add('POST', '/guardar', ['ProductoController', 'guardar']);
 $router->add('GET', '/buscar', ['ProductoController', 'buscarPorCodigo']);
 $router->add('POST', '/producto/actualizar', ['ProductoController', 'actualizar']);
+$router->add('GET', '/producto/export/csv', ['DashboardProductoController', 'exportCsv']);
+$router->add('GET', '/producto/export/excel', ['DashboardProductoController', 'exportExcel']);
 
 
 

@@ -16,6 +16,24 @@
     <a href="/dashboard" class="btn btn-link">Volver al Dashboard</a>
   </div>
 
+  <!-- FORMULARIO DE EXPORTACION-->
+<form class="d-inline" method="GET" action="/producto/export/csv">
+  <!-- Reenviamos los mismos filtros -->
+  <input type="hidden" name="search"       value="<?= htmlspecialchars($search) ?>">
+  <input type="hidden" name="stock_filter" value="<?= htmlspecialchars($stockFilter) ?>">
+  <input type="hidden" name="categoria"    value="<?= htmlspecialchars($categoriaId) ?>">
+  <button class="btn btn-outline-secondary me-2">Exportar a CSV</button>
+</form>
+
+<form class="d-inline" method="GET" action="/producto/export/excel">
+  <input type="hidden" name="search"       value="<?= htmlspecialchars($search) ?>">
+  <input type="hidden" name="stock_filter" value="<?= htmlspecialchars($stockFilter) ?>">
+  <input type="hidden" name="categoria"    value="<?= htmlspecialchars($categoriaId) ?>">
+  <button class="btn btn-outline-success">Exportar a Excel</button>
+</form>
+
+
+
   <!-- FORMULARIO DE BÚSQUEDA Y FILTROS -->
   <form class="row g-3 mb-4" method="GET" action="/dashboard/productos">
     <div class="col-md-4">

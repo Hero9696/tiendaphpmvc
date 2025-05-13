@@ -1,6 +1,6 @@
 {
     "require": {
-        "firebase/php-jwt": "^6.11"
+        "firebase/php-jwt": "^6.11","phpoffice/phpspreadsheet": "4.2"
     },
 "autoload": {
   "psr-4": {
@@ -9,5 +9,3 @@
 }
     
 }
-
-
