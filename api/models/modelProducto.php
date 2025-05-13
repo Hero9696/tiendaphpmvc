@@ -89,4 +89,78 @@ class Producto {
     $stmt->close();
     return $producto;
 }
+public function obtenerProductosFiltrados(
+    string $search,
+    string $stockFilter,
+    string $categoriaId
+): array {
+    $conn = Database::getConnection();
+
+    // Base de la consulta con join para obtener nombre de categoría
+    $sql = "
+      SELECT p.*, c.nombre AS categoria_nombre
+      FROM productos p
+      LEFT JOIN categorias c ON p.id_categoria = c.id
+    ";
+
+    $conds  = [];
+    $params = [];
+    $types  = '';
+
+    // Filtro de texto (nombre, código, categoría)
+    if ($search !== '') {
+        $conds[]    = "(p.nombre LIKE ? OR p.codigo LIKE ? OR c.nombre LIKE ?)";
+        $like       = "%{$search}%";
+        $params    = array_merge($params, [$like, $like, $like]);
+        $types     .= 'sss';
+    }
+
+    // Filtro por rango de stock
+    switch ($stockFilter) {
+        case 'low':
+            $conds[] = "p.stock <= 5";
+            break;
+        case 'mid':
+            $conds[] = "p.stock BETWEEN 6 AND 10";
+            break;
+        case 'high':
+            $conds[] = "p.stock > 10";
+            break;
+    }
+
+    // Filtro por categoría
+    if ($categoriaId !== '') {
+        $conds[]   = "p.id_categoria = ?";
+        $params[]  = $categoriaId;
+        $types    .= 'i';
+    }
+
+    // Si hay condiciones, agrégalas al WHERE
+    if (count($conds) > 0) {
+        $sql .= ' WHERE ' . implode(' AND ', $conds);
+    }
+
+    // Ordenar siempre por stock ascendente
+    $sql .= ' ORDER BY p.stock ASC';
+
+    // Preparar y bind de parámetros dinámicos
+    $stmt = $conn->prepare($sql);
+    if ($types !== '') {
+        // bind_param requiere variables por referencia, así que usamos call_user_func_array
+        $refs = [];
+        foreach ($params as $k => $v) {
+            $refs[$k] = &$params[$k];
+        }
+        array_unshift($refs, $types);
+        call_user_func_array([$stmt, 'bind_param'], $refs);
+    }
+
+    $stmt->execute();
+    $productos = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+    return $productos;
+}
+
+
 }

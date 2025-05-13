@@ -5,38 +5,34 @@ use Firebase\JWT\Key;
 require_once __DIR__ . '/../middleware/auth.php'; // Asegúrate de que la ruta sea correcta
 class DashboardProductoController {
     // Método para mostrar el dashboard de productos
- public function dashboard() {
-            // Verificar que el token es válido
-            verificarToken(); // Verifica el token antes de continuar
-            if (!isset($_COOKIE['token'])) {
-                header("Location: /");
-                exit();
-            }
-        
-            require_once __DIR__ . '/../../vendor/autoload.php';
-        
-            try {
-                // Verificar el token JWT
-                $decoded = JWT::decode($_COOKIE['token'], new Key('clave_secreta_segura', 'HS256'));
-        
-                // Obtener los productos desde el modelo
-                require_once __DIR__ . '/../models/modelProducto.php';
-                $productoModel = new Producto();
-                $productos = $productoModel->obtenerProductosOrdenadosPorStock();
-        
-                // Mostrar la vista
-                ob_start();
-                require __DIR__ . '/../../views/dashboard/dashboardproductos.php';
-                $content = ob_get_clean();
-                $title = "Dashboard de Productos";
-                require_once __DIR__ . '/../../views/layout/layout.php';
-            } catch (Exception $e) {
-                // Si el token es inválido o ha expirado
-                echo "<script>
-                        alert('Su sesión ha expirado. Será redirigido al login.');
-                        window.location.href = '/';
-                      </script>";
-                exit();
-            }
-        }
+  public function dashboard() {
+        // 1) Verificar JWT y renovar si hace falta
+        $user = verificarToken(true);
+
+        // 2) Leer filtros desde la URL (GET)
+        $search      = $_GET['search']       ?? '';
+        $stockFilter = $_GET['stock_filter'] ?? '';
+        $categoriaId = $_GET['categoria']    ?? '';
+
+        // 3) Cargar modelos
+        require_once __DIR__ . '/../models/modelCategoria.php';
+        require_once __DIR__ . '/../models/modelProducto.php';
+        $categoriaModel = new Categoria();
+        $productoModel  = new Producto();
+
+        // 4) Obtener datos
+        $categorias = $categoriaModel->obtenerCategorias();
+        $productos  = $productoModel->obtenerProductosFiltrados(
+            $search,
+            $stockFilter,
+            $categoriaId
+        );
+
+        // 5) Renderizar la vista con layout
+        ob_start();
+        require __DIR__ . '/../../views/dashboard/dashboardproductos.php';
+        $content = ob_get_clean();
+        $title   = "Dashboard de Productos";
+        require_once __DIR__ . '/../../views/layout/layout.php';
+    }
     }
