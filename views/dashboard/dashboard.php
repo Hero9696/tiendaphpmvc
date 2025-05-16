@@ -61,6 +61,11 @@ body {
                 <i class="bi bi-receipt"></i> Ver Ventas
             </a>
         </div>
+        <div class="col-md-4 mb-3">
+            <a href="/proveedores" class="btn btn-success w-100 p-3">
+                <i class="bi bi-receipt"></i> Proveedores
+            </a>
+        </div>
     </div>
 
     <!-- Resumen -->

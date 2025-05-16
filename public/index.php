@@ -44,6 +44,23 @@ $router->add('POST', '/categoria/editar',    ['CategoriaController', 'editar']);
 // Procesar eliminación
 $router->add('POST', '/categoria/eliminar',  ['CategoriaController', 'eliminar']);
 
+// Rutas para Proveedores
+// Listado de proveedores en el dashboard
+$router->add('GET',  '/proveedores',    ['ProveedorController', 'index']);
+
+// Formulario de creación
+$router->add('GET',  '/proveedor/crear',         ['ProveedorController', 'crearForm']);
+// Procesar creación
+$router->add('POST', '/proveedor/crear',         ['ProveedorController', 'crear']);
+
+// Formulario de edición (recibe ?id=XX)
+$router->add('GET',  '/proveedor/editar',        ['ProveedorController', 'editarForm']);
+// Procesar edición
+$router->add('POST', '/proveedor/editar',        ['ProveedorController', 'editar']);
+
+// Procesar eliminación
+$router->add('POST', '/proveedor/eliminar',      ['ProveedorController', 'eliminar']);  
+
 
 
 $method = $_SERVER['REQUEST_METHOD'];

@@ -187,7 +187,7 @@ public function buscarPorCodigo() {
     
     private function render($view) {
         ob_start();  // Inicia la captura de salida
-        require_once __DIR__ . '/../../public/views/' . $view;  // Incluye la vista especificada
+        require_once __DIR__ . '/../../views' . $view;  // Incluye la vista especificada
         return ob_get_clean();  // Devuelve el contenido generado
     }
 
