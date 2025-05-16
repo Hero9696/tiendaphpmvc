@@ -108,7 +108,7 @@
       <div class="panel card">
         <div class="card-body text-center">
           <h5 class="card-title">Añadir Categorias</h5>
-          <a href="/producto/añadirStock" class="btn btn-primary w-100">Añadir</a>
+          <a href="/dashboard/categorias" class="btn btn-primary w-100">Añadir</a>
         </div>
       </div>
     </div>

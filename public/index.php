@@ -27,6 +27,24 @@ $router->add('GET', '/producto/export/csv', ['DashboardProductoController', 'exp
 $router->add('GET', '/producto/export/excel', ['DashboardProductoController', 'exportExcel']);
 
 
+// Rutas para Categorías
+// Listar todas las categorías en el dashboard
+$router->add('GET',  '/dashboard/categorias', ['CategoriaController', 'index']);
+
+// Formulario de creación
+$router->add('GET',  '/categoria/crear',     ['CategoriaController', 'crearForm']);
+// Procesar creación
+$router->add('POST', '/categoria/crear',     ['CategoriaController', 'crear']);
+
+// Formulario de edición (recibe ?id=XX)
+$router->add('GET',  '/categoria/editar',    ['CategoriaController', 'editarForm']);
+// Procesar edición
+$router->add('POST', '/categoria/editar',    ['CategoriaController', 'editar']);
+
+// Procesar eliminación
+$router->add('POST', '/categoria/eliminar',  ['CategoriaController', 'eliminar']);
+
+
 
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
